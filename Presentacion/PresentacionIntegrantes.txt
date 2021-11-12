@@ -4,4 +4,6 @@
 
 - Hola, mi nombre es Andrés Felipe Garzón, vivo en Bogotá y actualmente estudio tecnologia en Desarrollo de Software y el programa Mision TIC 2022.
 
-- Hola a todos, me llamo Nicolás Archila, vivo en la ciudad de Bogotá, soy politólogo de profesión y actualmente hago parte del programa Misión TIC 2022.
+- Hola a todos, me llamo Nicolás Archila, vivo en la ciudad de Bogotá, soy politólogo de profesión y actualmente hago parte del programa Misión TIC 2022.\
+
+- Hola, mi nombre es Katerin Restrepo Cano, soy oriunda de Medellín pero vivo en la Ceja, Antioquia. Soy psicóloga de profesión, pero actualmente trabajo en una compañia como Analista de calidad, y además hago parte del programa Misión TIC 2022. 
