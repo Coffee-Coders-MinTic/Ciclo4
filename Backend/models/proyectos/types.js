@@ -1,47 +1,38 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 const typesProyecto = gql`
   input camposProyecto {
-    nombreProyecto: String
-    presupuesto: Float
-    fechaInicio: Date
+    nombreProyecto: String!
+    presupuesto: Float!
+    fechaInicio: Date!
     fechaFinal: Date
     estado: Enum_EstadoProyecto
     fase: Enum_Fase
-    lider: String
-    objGenerales:[String]
+    lider: String!
+    objGenerales: [String]
     objEspecificos: [String]
-
   }
+
   type Proyecto {
     _id: ID!
     nombreProyecto: String!
     presupuesto: Float!
     fechaInicio: Date!
-    fechaFinal: Date!
+    fechaFinal: Date
     estado: Enum_EstadoProyecto!
     fase: Enum_Fase!
     lider: Usuario!
-    objGenerales:[String]
+    objGenerales: [String]
     objEspecificos: [String]
     avances: [Avance]
     inscripciones: [Inscripcion]
-
   }
   type Query {
     Proyectos: [Proyecto]
+    Proyecto(_id: String!): Proyecto
   }
   type Mutation {
-    crearProyecto(
-      nombreProyecto: String!
-      presupuesto: Float!
-      fechaInicio: Date!
-      fechaFinal: Date!
-      estado: Enum_EstadoProyecto!
-      fase: Enum_Fase!
-      lider: String!
-
-    ): Proyecto
+    crearProyecto(proyecto: camposProyecto): String
     editarProyecto(_id: String!, campos: camposProyecto!): Proyecto
   }
 `;

@@ -1,36 +1,48 @@
-import { ProyectoModel } from './proyecto.js';
+import { ProyectoModel } from "./proyecto.js";
+import { UsuarioModel } from "../usuarios/usuario.js";
 
 const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args) => {
-      const proyectos = await ProyectoModel.find();
-      return proyectos;
+      return await ProyectoModel.find().populate("lider inscripciones");
+      //TODO
+      // Revisar para popular los usuarios por medio de inscripciones
+    },
+    Proyecto: async (parent, args) => {
+      return await ProyectoModel.findOne({ _id: args._id }).populate("lider");
     },
   },
   Mutation: {
-    crearProyecto: async (parent, args) => {
-      const proyectoCreado = await ProyectoModel.create({
-        nombreProyecto: args.nombreProyecto,
-        estado: args.estado,
-        fase: args.fase,
-        fechaInicio: args.fechaInicio,
-        fechaFinal: args.fechaFinal,
-        presupuesto: args.presupuesto,
-        lider: args.lider,
-        objGenerales: args.objGenerales,
-        objEspecificos: arg.objEspecificos,
-      });
-      return proyectoCreado;
+    crearProyecto: (parent, args) => {
+      const {
+        nombreProyecto,
+        presupuesto,
+        fechaInicio,
+        fechaFinal,
+        estado,
+        fase,
+        lider,
+        objGenerales,
+        objEspecificos,
+      } = args.proyecto;
+
+      return ProyectoModel.create(args.proyecto)
+        .then((u) => "Proyecto creado")
+        .catch((err) => console.log(err));
     },
     editarProyecto: async (parent, args) => {
-      const proyectoEditado = await ProyectoModel.findByIdAndUpdate(
-        args._id,
-        { ...args.campos },
-        { new: true }
-      );
-      return proyectoEditado;
-    },   
+      const actualUser = await UsuarioModel.findOne({ _id: args.campos.lider });
+
+      if (actualUser.tipo === "LIDER") {
+        const proyectoEditado = await ProyectoModel.findByIdAndUpdate(
+          args._id,
+          { ...args.campos },
+          { new: true }
+        ).populate("lider");
+        return proyectoEditado;
+      }
     },
+  },
 };
 
 export { resolversProyecto };
