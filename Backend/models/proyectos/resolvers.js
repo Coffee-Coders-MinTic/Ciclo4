@@ -4,7 +4,9 @@ import { UsuarioModel } from "../usuarios/usuario.js";
 const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args) => {
-      return await ProyectoModel.find().populate("lider");
+      return await ProyectoModel.find().populate("lider inscripciones");
+      //TODO
+      // Revisar para popular los usuarios por medio de inscripciones
     },
     Proyecto: async (parent, args) => {
       return await ProyectoModel.findOne({ _id: args._id }).populate("lider");
