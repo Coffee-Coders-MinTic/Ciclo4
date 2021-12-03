@@ -1,0 +1,2 @@
+PORT = 4000
+DATABASE_URL = mongodb+srv://dcquinche:dc.hope119@clustermintic.nero4.mongodb.net/GestionProyectos?retryWrites=true&w=majority
