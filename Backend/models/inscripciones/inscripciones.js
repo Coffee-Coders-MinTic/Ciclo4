@@ -4,13 +4,6 @@ import {ProyectoModel} from "../proyectos/proyecto.js";
 //import { Enum_EstadoInscripcion } from "../enums";
 const { Schema, model } = mongoose;
 
-// interface Registration{
-//     estado: Enum_EstadoInscripcion;
-//     fechaIngreso: Date;
-//     fechaEgreso: Date;
-//     proyecto: Schema.Types.ObjectId;
-//     estudiante: Schema.Types.ObjectId;
-// }
 
 const inscripcionSchema = new Schema({
     estado:{type:String, enum:['ACEPTADO','RECHAZADO','PENDIENTE'], required:true, default:'PENDIENTE'},
