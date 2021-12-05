@@ -1,16 +1,7 @@
 import mongoose from "mongoose";
-//import { Enum_Tipo, Enum_EstadoUsuario } from "./enums";
+
 
 const { Schema, model } = mongoose;
-
-// interface User{
-//     correo: string;
-//     identificacion: string;
-//     nombreCompleto: string;
-//     tipo: Enum_Tipo;
-//     estado: Enum_EstadoUsuario;
-// }
-
 
 const usuarioSchema = new Schema({
     correo:{type:String, required:true, unique:true},
@@ -19,6 +10,25 @@ const usuarioSchema = new Schema({
     tipo:{type:String, required:true, enum:['ESTUDIANTE','LIDER','ADMINISTRADOR']},
     estado:{type:String, enum:['PENDIENTE','AUTORIZADO','NO_AUTORIZADO'], default:'PENDIENTE'}
 })
+
+usuarioSchema.virtual('proyectosLiderados', {
+    ref: 'Proyecto',
+    localField: '_id',
+    foreignField: 'lider',
+  });
+  
+  usuarioSchema.virtual('avances', {
+    ref: 'Avance',
+    localField: '_id',
+    foreignField: 'creador',
+  });
+  
+  usuarioSchema.virtual('inscripciones', {
+    ref: 'Inscripcion',
+    localField: '_id',
+    foreignField: 'estudiante',
+  });
+
 
 const UsuarioModel = model('Usuario', usuarioSchema, 'usuarios'); //Usuario es el nombre del modelo 
 

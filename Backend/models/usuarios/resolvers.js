@@ -1,10 +1,10 @@
 import { UsuarioModel } from './usuario.js';
-//import bcrypt from 'bcrypt';
+
 
 const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args) => {
-      const usuarios = await UsuarioModel.find().populate([
+      const usuarios = await UsuarioModel.find({ ...args.filtro }).populate([
         {
           path: 'inscripciones',
           populate: {
@@ -25,14 +25,11 @@ const resolversUsuario = {
   },
   Mutation: {
     crearUsuario: async (parent, args) => {
-      //const salt = await bcrypt.genSalt(10);
-      //const hashedPassword = await bcrypt.hash(args.password, salt);
       const usuarioCreado = await UsuarioModel.create({
         correo: args.correo,
         nombreCompleto: args.nombreCompleto,
         identificacion: args.identificacion,
         tipo: args.tipo,
-        //password: hashedPassword,
       });
 
       if (Object.keys(args).includes('estado')) {
