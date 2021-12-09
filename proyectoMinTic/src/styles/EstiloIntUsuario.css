@@ -1,0 +1,29 @@
+.tabla {
+    margin: 10px;
+}
+
+.tabla td,
+.tabla th {
+  padding: 4px;
+  border: 2px;
+  border-style: double;
+  border-color:lightsteelblue;
+}
+
+.tabla th {
+    background-color: #0fb4b4;
+    color: white;
+    font-weight: bold;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.tabla tr:nth-child(even) {
+    background-color:lightblue;
+}
+
+.tabla tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
