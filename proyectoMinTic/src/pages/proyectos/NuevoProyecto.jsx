@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import DropDown from 'components/Dropdown';
 import ButtonLoading from 'components/ButtonLoading';
 import useFormData from 'hooks/useFormData';
-import { Enum_TipoObjetivo } from 'utils/enums';
+//import { Enum_TipoObjetivo } from 'utils/enums';
 import { nanoid } from 'nanoid';
 import { ObjContext } from 'context/objContext';
 import { useObj } from 'context/objContext';
@@ -123,12 +123,12 @@ const FormObjetivo = ({ id }) => {
         type='text'
         required={true}
       />
-      <DropDown
+      {/* <DropDown
         name={`nested||objetivos||${id}||tipo`}
         options={Enum_TipoObjetivo}
         label='Tipo de Objetivo'
         required={true}
-      />
+      /> */}
       <i
         onClick={() => eliminarObjetivo(id)}
         className='fas fa-minus rounded-full bg-red-500 hover:bg-red-400 text-white p-2 mx-2 cursor-pointer mt-6'

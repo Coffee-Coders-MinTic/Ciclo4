@@ -29,5 +29,5 @@ const Enum_EstadoInscripcion = {
     };
 
 
-
-export {Enum_EstadoUsuario,Enum_EstadoProyecto,Enum_Tipo,Enum_EstadoProyecto,Enum_Fase,Enum_EstadoInscripcion};
+    
+export {Enum_EstadoUsuario,Enum_EstadoProyecto,Enum_Tipo,Enum_Fase,Enum_EstadoInscripcion};
