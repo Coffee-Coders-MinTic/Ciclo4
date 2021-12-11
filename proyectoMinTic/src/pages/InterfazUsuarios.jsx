@@ -92,7 +92,7 @@ const RegistroUsuarios=({setMostrarTabla, listaUsuarios, setUsuarios})=>{
             method: 'POST',
             url: 'http://localhost:5000/usuarios/',
             headers: { 'Content-Type': 'application/json' },
-            data: { documento: nuevoUsuario.documento, nombre: nuevoUsuario.nombre, correo: nuevoUsuario.correo, telefono: nuevoUsuario.telefono, estado: nuevoUsuario.estado, rol: nuevoUsuario.rol },
+            data: { documento: nuevoUsuario.documento, nombre: nuevoUsuario.nombre, correo: nuevoUsuario.correo, telefono: nuevoUsuario.telefono, estado: nuevoUsuario.estado, tipo: nuevoUsuario.tipo },
             };
               
         await axios
@@ -246,7 +246,7 @@ const FilaUsuario = ({usuarios, setConsulta})=>{
         correo:usuarios.correo,
         telefono:usuarios.telefono,
         estado:usuarios.estado,
-        rol:usuarios.rol,
+        tipo:usuarios.tipo,
 
     })
 
@@ -294,7 +294,7 @@ const FilaUsuario = ({usuarios, setConsulta})=>{
             </select>
             </td>
             <td>
-            <select value={infoEditarUsuario.rol} onChange={(e)=>setInfoEditarUsuario({...infoEditarUsuario, rol:e.target.value})} >
+            <select value={infoEditarUsuario.tipo} onChange={(e)=>setInfoEditarUsuario({...infoEditarUsuario, rol:e.target.value})} >
                 <option disabled value={0}>Seleccione una opción</option>
                 <option>Vendedor</option>
                 <option>Administrador</option>
@@ -308,7 +308,7 @@ const FilaUsuario = ({usuarios, setConsulta})=>{
             <td>{usuarios.correo}</td>
             <td>{usuarios.telefono}</td>
             <td>{usuarios.estado}</td>
-            <td>{usuarios.rol}</td>
+            <td>{usuarios.tipo}</td>
             </>
         )}
         <td>

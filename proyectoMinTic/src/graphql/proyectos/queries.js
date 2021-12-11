@@ -10,12 +10,11 @@ const PROYECTOS = gql`
       presupuesto
       fechaInicio
       fechaFinal
-      fase
       objGenerales
-    objEspecificos
+      objEspecificos
       lider {
         _id
-        correo
+        nombreCompleto
       }
       inscripciones {
         estado
