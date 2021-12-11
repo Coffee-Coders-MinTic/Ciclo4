@@ -67,7 +67,7 @@ function App() {
         apellido: decoded.apellido,
         identificacion: decoded.identificacion,
         correo: decoded.correo,
-        rol: decoded.rol,
+        tipo: decoded.tipo,
       });
     }
   }, [authToken]);
@@ -79,6 +79,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<PrivateLayout />}>
+              {/* <Route path='/'> */}
                 <Route path='' element={<Index />} />
                 <Route path='/usuarios' element={<IndexUsuarios />} />
                 <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
@@ -89,7 +90,7 @@ function App() {
                 <Route path='category1' element={<IndexCategory1 />} />
                 <Route path='category1/page1' element={<Category1 />} />
               </Route>
-              <Route path='/auth' element={<AuthLayout />}>
+              <Route path='/auth' >
                 <Route path='register' element={<Register />} />
                 <Route path='login' element={<Login />} />
               </Route>

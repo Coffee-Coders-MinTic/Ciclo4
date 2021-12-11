@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const EDITAR_PROYECTO = gql`
   mutation Mutation($_id: String!, $campos: camposProyecto!) {
@@ -11,29 +11,25 @@ const EDITAR_PROYECTO = gql`
 
 const CREAR_PROYECTO = gql`
   mutation CrearProyecto(
-    $nombreProyecto: String!
-    $objGenerales: [String]
-    $objEspecificos: [String]
+    $nombre: String!
     $presupuesto: Float!
     $fechaInicio: Date!
-    $fechaFinal: Date!
-    $estado: Enum_EstadoProyecto
-    $fase: Enum_Fase
-    $lider: String!    
+    $fechaFin: Date!
+    $lider: String!
+    $objGenerales: [String]
+    $objEspecificos: [String]
+    
   ) {
     crearProyecto(
-      nombreProyecto: $nombreProyecto
-      objGenerales: $objGenerales
-      objespecificos: $objEspecificos
+      nombreProyecto: $nombre
       presupuesto: $presupuesto
       fechaInicio: $fechaInicio
-      fechaFinal: $fechaFinal
-    estado: $estado
-        fase: $fase
+      fechaFin: $fechaFin
       lider: $lider
-      
+      objGenerales: $objGenerales
+      objEspecificos: $objEspecificos
     ) {
-      _id: ID!
+      _id
     }
   }
 `;

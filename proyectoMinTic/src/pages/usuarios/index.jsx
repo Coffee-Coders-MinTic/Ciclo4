@@ -43,7 +43,7 @@ const IndexUsuarios = () => {
                       <td>{u.apellido}</td>
                       <td>{u.correo}</td>
                       <td>{u.identificacion}</td>
-                      <td>{Enum_Tipo[u.rol]}</td>
+                      <td>{Enum_Tipo[u.tipo]}</td>
                       <td>{Enum_EstadoUsuario[u.estado]}</td>
                       <td>
                         <Link to={`/usuarios/editar/${u._id}`}>
