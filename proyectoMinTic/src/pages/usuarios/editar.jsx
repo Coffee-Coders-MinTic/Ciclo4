@@ -28,7 +28,7 @@ const EditarUsuario = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    delete formData.rol;
+    delete formData.tipo;
     editarUsuario({
       variables: { _id, ...formData },
     });
@@ -99,7 +99,7 @@ const EditarUsuario = () => {
           required={true}
           options={Enum_EstadoUsuario}
         />
-        <span>Rol del usuario: {queryData.Usuario.rol}</span>
+        <span>Rol del usuario: {queryData.Usuario.tipo}</span>
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
           loading={mutationLoading}

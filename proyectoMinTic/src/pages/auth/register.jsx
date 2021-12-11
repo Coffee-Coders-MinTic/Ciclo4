@@ -40,7 +40,7 @@ const Register = () => {
           <Input label='Nombre:' name='nombre' type='text' required />
           <Input label='Apellido:' name='apellido' type='text' required />
           <Input label='Documento:' name='identificacion' type='text' required />
-          <DropDown label='Rol deseado:' name='rol' required={true} options={Enum_Tipo} />
+          <DropDown label='Rol deseado:' name='tipo' required={true} options={Enum_Tipo} />
           <Input label='Correo:' name='correo' type='email' required />
           <Input label='Contraseña:' name='password' type='password' required />
         </div>
