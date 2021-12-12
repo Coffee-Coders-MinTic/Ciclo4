@@ -7,8 +7,8 @@ const { Schema, model } = mongoose;
 
 const inscripcionSchema = new Schema({
     estado:{type:String, enum:['ACEPTADO','RECHAZADO','PENDIENTE'], required:true, default:'PENDIENTE'},
-    fechaIngreso:{type:Date, required:false},
-    fechaEgreso:{type:Date, required:false},
+    //fechaIngreso:{type:Date, required:false},
+    //fechaEgreso:{type:Date, required:false},
     proyecto:{type:Schema.Types.ObjectId, ref:ProyectoModel, required:true},
     estudiante:{type:Schema.Types.ObjectId, ref:UsuarioModel, required:true}
 })
