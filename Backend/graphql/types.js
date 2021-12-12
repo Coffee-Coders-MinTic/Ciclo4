@@ -4,6 +4,7 @@ import {typesUsuario} from '../models/usuarios/types.js';
 import {typesProyecto} from '../models/proyectos/types.js';
 import { typesAvance } from '../models/avances/types.js';
 import { typesInscripcion } from '../models/inscripciones/types.js';
+import { typesAutenticacion } from './auth/types.js';
 
 
 // Toca ponerlo de esta manera porque graphql no lo tiene como tipo de dato
@@ -18,4 +19,5 @@ export const types = [
     typesProyecto,
     typesAvance,
     typesInscripcion,
+    typesAutenticacion,
 ];

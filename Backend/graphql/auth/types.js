@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-const tiposAutenticacion = gql`
+const typessAutenticacion = gql`
   type Token {
     token: String
     error: String
@@ -23,4 +23,4 @@ const tiposAutenticacion = gql`
   }
 `;
 
-export { tiposAutenticacion };
+export { typesAutenticacion };

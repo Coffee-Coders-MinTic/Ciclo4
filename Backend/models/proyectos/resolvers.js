@@ -1,7 +1,23 @@
 import { ProyectoModel } from "./proyecto.js";
 import { UsuarioModel } from "../usuarios/usuario.js";
+import { InscripcionModel } from '../inscripciones/inscripciones.js';
 
 const resolversProyecto = {
+  Proyecto: {
+    lider: async (parent, args, context) => {
+      const usr = await UsuarioModel.findOne({
+        _id: parent.lider.toString(),
+      });
+      return usr;
+    },
+    inscripciones: async (parent, args, context) => {
+      const inscripciones = await InscriptionModel.find({
+        proyecto: parent._id,
+      });
+      return inscripciones;
+    },
+  },
+
   Query: {
     Proyectos: async (parent, args) => {
       return await ProyectoModel.find().populate("lider inscripciones");

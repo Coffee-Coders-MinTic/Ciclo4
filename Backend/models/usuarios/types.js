@@ -32,6 +32,7 @@ const typesUsuario = gql`
       identificacion: String!
       tipo: Enum_Tipo!
       estado: Enum_EstadoUsuario
+      password: String!
     ): Usuario
     editarUsuario(
       _id: String!

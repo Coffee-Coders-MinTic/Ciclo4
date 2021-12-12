@@ -3,19 +3,20 @@ import { gql } from "apollo-server-express"
 // Por convención los enums en graphql van en mayuscula
 const Enums = gql`
     
+    enum Enum_EstadoUsuario{
+        PENDIENTE
+        AUTORIZADO 
+        NO_AUTORIZADO 
+    }    
+
     enum Enum_Tipo{ 
         ESTUDIANTE 
         LIDER 
         ADMINISTRADOR 
     }
     
-    enum Enum_EstadoUsuario{
-        PENDIENTE
-        AUTORIZADO 
-        NO_AUTORIZADO 
-    }
-
    
+  
     enum Enum_EstadoProyecto{
         ACTIVO
         INACTIVO

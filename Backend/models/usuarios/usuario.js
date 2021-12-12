@@ -4,7 +4,14 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const usuarioSchema = new Schema({
-    correo:{type:String, required:true, unique:true},
+  correo: {type: String, required: true, unique: true,
+    validate: {validator: (email) => {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+      }, 
+      message: 'El formato del correo electrónico está malo.',
+    },
+  },
+    password: {type:String, required: true},
     identificacion:{type:String, required:true, unique:true},
     nombreCompleto:{type:String, required:true},
     tipo:{type:String, required:true, enum:['ESTUDIANTE','LIDER','ADMINISTRADOR']},
