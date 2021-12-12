@@ -16,8 +16,9 @@ const Sidebar = () => {
       </Link>
 
       <div className='my-4'>
-        <Ruta icono='' ruta='/usuarios' nombre='Usuarios' />
-        <Ruta icono='' ruta='/proyectos' nombre='Proyectos' />
+        <Ruta icono='' ruta='/usuarios/index' nombre='Usuarios' />
+        <Ruta icono='' ruta='/proyectos/NuevoProyecto' nombre='Proyectos' />
+        <Ruta icono='' ruta='/inscripciones/index' nombre='Inscripciones' />
         <Ruta icono='' ruta='/auth/login' nombre='Login' />
       </div>
       <button className='bg-indigo-500 p-1 text-white rounded-md shadow-md hover:bg-red-400'>
