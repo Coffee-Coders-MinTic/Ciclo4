@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-const typessAutenticacion = gql`
+const typesAutenticacion = gql`
   type Token {
     token: String
     error: String
