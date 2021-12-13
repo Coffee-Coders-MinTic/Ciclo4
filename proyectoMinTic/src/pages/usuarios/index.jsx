@@ -3,8 +3,9 @@ import { useQuery } from '@apollo/client';
 import { GET_USUARIOS } from 'graphql/usuarios/queries';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import { Enum_Tipo, Enum_EstadoUsuario } from 'utils/enums';
+import { Enum_Rol, Enum_EstadoUsuario } from 'utils/enums';
 import PrivateRoute from 'components/PrivateRoute';
+import { Enum_Tipo } from 'utils/enums';
 
 const IndexUsuarios = () => {
   const { data, error, loading } = useQuery(GET_USUARIOS);
@@ -25,10 +26,9 @@ const IndexUsuarios = () => {
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Apellidos</th>
-              <th>Correo</th>
               <th>Identificación</th>
-              <th>Rol</th>
+              <th>Correo</th>
+              <th>Tipo</th>
               <th>Estado</th>
               <th>Editar</th>
             </tr>
@@ -39,10 +39,9 @@ const IndexUsuarios = () => {
                 {data.Usuarios.map((u) => {
                   return (
                     <tr key={u._id}>
-                      <td>{u.nombre}</td>
-                      <td>{u.apellido}</td>
-                      <td>{u.correo}</td>
+                      <td>{u.nombreCompleto}</td>
                       <td>{u.identificacion}</td>
+                      <td>{u.correo}</td>
                       <td>{Enum_Tipo[u.tipo]}</td>
                       <td>{Enum_EstadoUsuario[u.estado]}</td>
                       <td>

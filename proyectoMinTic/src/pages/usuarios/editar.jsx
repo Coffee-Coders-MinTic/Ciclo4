@@ -65,24 +65,10 @@ const EditarUsuario = () => {
         className='flex flex-col items-center justify-center'
       >
         <Input
-          label='Nombre de la persona:'
+          label='Nombre completo de la persona:'
           type='text'
           name='nombre'
-          defaultValue={queryData.Usuario.nombre}
-          required={true}
-        />
-        <Input
-          label='Apellido de la persona:'
-          type='text'
-          name='apellido'
-          defaultValue={queryData.Usuario.apellido}
-          required={true}
-        />
-        <Input
-          label='Correo de la persona:'
-          type='email'
-          name='correo'
-          defaultValue={queryData.Usuario.correo}
+          defaultValue={queryData.Usuario.nombreCompleto}
           required={true}
         />
         <Input
@@ -92,6 +78,13 @@ const EditarUsuario = () => {
           defaultValue={queryData.Usuario.identificacion}
           required={true}
         />
+        <Input
+          label='Correo de la persona:'
+          type='email'
+          name='correo'
+          defaultValue={queryData.Usuario.correo}
+          required={true}
+        />
         <DropDown
           label='Estado de la persona:'
           name='estado'
@@ -99,7 +92,7 @@ const EditarUsuario = () => {
           required={true}
           options={Enum_EstadoUsuario}
         />
-        <span>Rol del usuario: {queryData.Usuario.tipo}</span>
+        <span>Tipo de usuario: {queryData.Usuario.tipo}</span>
         <ButtonLoading
           disabled={Object.keys(formData).length === 0}
           loading={mutationLoading}
