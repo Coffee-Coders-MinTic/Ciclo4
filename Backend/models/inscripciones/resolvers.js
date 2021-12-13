@@ -1,12 +1,40 @@
 import { InscripcionModel } from "./inscripciones.js";
+import { UsuarioModel } from "../usuarios/usuario.js";
+import { ProyectoModel } from "../proyectos/proyecto.js";
 
 const resolverInscripciones = {
+  Inscripcion: {
+    proyecto: async (parent, args, context) => {
+      return await ProyectoModel.findOne({ _id: parent.proyecto });
+    },
+    estudiante: async (parent, args, context) => {
+      return await UsuarioModel.findOne({ _id: parent.estudiante });
+    },
+  },
+
   Query: {
-    inscripciones: async (parent, args) => {
-      const inscripciones = await InscripcionModel.find().populate(
-        "proyecto estudiante"
-      );
+    Inscripciones: async (parent, args, context) => {
+      let filtro = {};
+      if (context.userData) {
+        if (context.userData.tipo === "LIDER") {
+          const projects = await ProjectModel.find({
+            lider: context.userData._id,
+          });
+          const projectList = projects.map((p) => p._id.toString());
+          filtro = {
+            proyecto: {
+              $in: projectList,
+            },
+          };
+        }
+      }
+      const inscripciones = await InscripcionModel.find({ ...filtro });
       return inscripciones;
+
+      // const inscripciones = await InscripcionModel.find().populate(
+      //   "proyecto estudiante"
+      // );
+      // return inscripciones;
     },
     inscripcionesPendientes: async (parent, args) => {
       const inscripcionesPend = await InscripcionModel.find({
@@ -27,7 +55,6 @@ const resolverInscripciones = {
 
       if (!inscripcionesActuales.length) {
         const inscripcionCreada = await InscripcionModel.create({
-          estado: args.estado,
           proyecto: args.proyecto,
           estudiante: args.estudiante,
         }).populate("proyecto estudiante");
@@ -43,7 +70,7 @@ const resolverInscripciones = {
         { estado: args.estado },
         { new: true }
       );
-      return inscripcionActualizada.estado;
+      return inscripcionActualizada;
     },
   },
 };

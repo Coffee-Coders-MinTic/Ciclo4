@@ -24,8 +24,7 @@ const IndexUsuarios = () => {
         <table className='tabla'>
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Apellidos</th>
+              <th>Nombre Completo</th>
               <th>Correo</th>
               <th>Identificación</th>
               <th>Rol</th>
@@ -39,8 +38,7 @@ const IndexUsuarios = () => {
                 {data.Usuarios.map((u) => {
                   return (
                     <tr key={u._id}>
-                      <td>{u.nombre}</td>
-                      <td>{u.apellido}</td>
+                      <td>{u.nombreCompleto}</td>
                       <td>{u.correo}</td>
                       <td>{u.identificacion}</td>
                       <td>{Enum_Tipo[u.tipo]}</td>
