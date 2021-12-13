@@ -2,19 +2,17 @@ import { gql } from '@apollo/client';
 
 const REGISTRO = gql`
   mutation Registro(
-    $nombre: String!
-    $apellido: String!
+    $nombreCompleto: String!
     $identificacion: String!
     $correo: String!
-    $rol: Enum_Tipo!
+    $tipo: Enum_Tipo!
     $password: String!
   ) {
     registro(
-      nombre: $nombre
-      apellido: $apellido
+      nombreCompleto: $nombreCompleto
       identificacion: $identificacion
       correo: $correo
-      rol: $rol
+      tipo: $tipo
       password: $password
     ) {
       token
