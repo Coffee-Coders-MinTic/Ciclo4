@@ -1,21 +1,17 @@
-import { UsuarioModel } from './usuario.js';
-
+import { UsuarioModel } from "./usuario.js";
+import bcrypt from "bcrypt";
+import { InscripcionModel } from "../inscripciones/inscripciones.js";
 
 const resolversUsuario = {
+  Usuario: {
+    inscripciones: async (parent, args, context) => {
+      return InscripcionModel.find({ estudiante: parent._id });
+    },
+  },
   Query: {
-    Usuarios: async (parent, args) => {
-      const usuarios = await UsuarioModel.find({ ...args.filtro }).populate([
-        {
-          path: 'inscripciones',
-          populate: {
-            path: 'proyecto',
-            populate: [{ path: 'lider' }, { path: 'avances' }],
-          },
-        },
-        {
-          path: 'proyectosLiderados',
-        },
-      ]);
+    Usuarios: async (parent, args, context) => {
+      console.log(args);
+      const usuarios = await UsuarioModel.find({ ...args.filtro });
       return usuarios;
     },
     Usuario: async (parent, args) => {
@@ -25,14 +21,17 @@ const resolversUsuario = {
   },
   Mutation: {
     crearUsuario: async (parent, args) => {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(args.password, salt);
       const usuarioCreado = await UsuarioModel.create({
         correo: args.correo,
         nombreCompleto: args.nombreCompleto,
         identificacion: args.identificacion,
         tipo: args.tipo,
+        password: hashedPassword,
       });
 
-      if (Object.keys(args).includes('estado')) {
+      if (Object.keys(args).includes("estado")) {
         usuarioCreado.estado = args.estado;
       }
 
@@ -53,11 +52,15 @@ const resolversUsuario = {
       return usuarioEditado;
     },
     eliminarUsuario: async (parent, args) => {
-      if (Object.keys(args).includes('_id')) {
-        const usuarioEliminado = await UsuarioModel.findOneAndDelete({ _id: args._id });
+      if (Object.keys(args).includes("_id")) {
+        const usuarioEliminado = await UsuarioModel.findOneAndDelete({
+          _id: args._id,
+        });
         return usuarioEliminado;
-      } else if (Object.keys(args).includes('correo')) {
-        const usuarioEliminado = await UsuarioModel.findOneAndDelete({ correo: args.correo });
+      } else if (Object.keys(args).includes("correo")) {
+        const usuarioEliminado = await UsuarioModel.findOneAndDelete({
+          correo: args.correo,
+        });
         return usuarioEliminado;
       }
     },

@@ -65,28 +65,21 @@ const EditarUsuario = () => {
         className='flex flex-col items-center justify-center'
       >
         <Input
-          label='Nombre de la persona:'
+          label='Nombre completo:'
           type='text'
           name='nombre'
-          defaultValue={queryData.Usuario.nombre}
+          defaultValue={queryData.Usuario.nombreCompleto}
           required={true}
         />
         <Input
-          label='Apellido de la persona:'
-          type='text'
-          name='apellido'
-          defaultValue={queryData.Usuario.apellido}
-          required={true}
-        />
-        <Input
-          label='Correo de la persona:'
+          label='Correo:'
           type='email'
           name='correo'
           defaultValue={queryData.Usuario.correo}
           required={true}
         />
         <Input
-          label='Identificación de la persona:'
+          label='Identificación:'
           type='text'
           name='identificacion'
           defaultValue={queryData.Usuario.identificacion}

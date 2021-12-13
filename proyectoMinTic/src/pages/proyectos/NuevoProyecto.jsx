@@ -17,7 +17,7 @@ const NuevoProyecto = () => {
   const [listaUsuarios, setListaUsuarios] = useState({});
   const { data, loading, error } = useQuery(GET_USUARIOS, {
     variables: {
-      filtro: { rol: 'LIDER', estado: 'AUTORIZADO' },
+      filtro: { tipo: 'LIDER', estado: 'AUTORIZADO' },
     },
   });
 
@@ -29,7 +29,7 @@ const NuevoProyecto = () => {
     if (data) {
       const lu = {};
       data.Usuarios.forEach((elemento) => {
-        lu[elemento._id] = elemento.correo;
+        lu[elemento._id] = elemento.nombreCompleto;
       });
 
       setListaUsuarios(lu);
@@ -62,7 +62,7 @@ const NuevoProyecto = () => {
       </div>
       <h1 className='text-2xl font-bold text-gray-900'>Crear Nuevo Proyecto</h1>
       <form ref={form} onChange={updateFormData} onSubmit={submitForm}>
-        <Input name='nombre' label='Nombre del Proyecto' required={true} type='text' />
+        <Input name='nombreProyecto' label='Nombre del Proyecto' required={true} type='text' />
         <Input name='presupuesto' label='Presupuesto del Proyecto' required={true} type='number' />
         <Input name='fechaInicio' label='Fecha de Inicio' required={true} type='date' />
         <Input name='fechaFin' label='Fecha de Fin' required={true} type='date' />
