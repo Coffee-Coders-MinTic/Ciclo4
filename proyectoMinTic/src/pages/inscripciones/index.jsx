@@ -20,8 +20,10 @@ const IndexInscripciones = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <PrivateRoute roleList={['ADMINISTRADOR', 'LIDER']}>
-      <div className='p-10'>
-        <div>Pagina de inscripciones</div>
+      <div className='p-10 flex flex-col'>
+        <div className='flex w-full items-center justify-center'>
+          <h1 className='text-2xl font-bold text-gray-900'>Inscripciones</h1>
+        </div>
         <div className='my-4'>
           <AccordionInscripcion
             titulo='Inscripciones aprobadas'
@@ -42,7 +44,7 @@ const IndexInscripciones = () => {
   );
 };
 
-const AccordionInscripcion = ({ data, titulo, refetch = () => {} }) => {
+const AccordionInscripcion = ({ data, titulo, refetch = () => { } }) => {
   return (
     <AccordionStyled>
       <AccordionSummaryStyled>

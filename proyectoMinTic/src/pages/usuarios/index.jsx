@@ -19,17 +19,21 @@ const IndexUsuarios = () => {
 
   return (
     <PrivateRoute roleList={['ADMINISTRADOR', 'LIDER']}>
-      <div>
-        Datos Usuarios:
-        <table className='tabla'>
+      <div className='p-10 flex flex-col'>
+        <div className='flex w-full items-center justify-center'>
+          <h1 className='text-2xl font-bold text-gray-900'>Lista de Usuarios</h1>
+        </div>
+      </div>
+      <div className='p-10 flex flex-col'>
+        <table className='border-collapse border border-gray-400'>
           <thead>
             <tr>
-              <th>Nombre Completo</th>
-              <th>Correo</th>
-              <th>Identificación</th>
-              <th>Rol</th>
-              <th>Estado</th>
-              <th>Editar</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Nombre Completo</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Correo</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Identificación</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Rol</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Estado</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -38,15 +42,14 @@ const IndexUsuarios = () => {
                 {data.Usuarios.map((u) => {
                   return (
                     <tr key={u._id}>
-                      <td>{u.nombreCompleto}</td>
-                      <td>{u.correo}</td>
-                      <td>{u.identificacion}</td>
-                      <td>{Enum_Tipo[u.tipo]}</td>
-                      <td>{Enum_EstadoUsuario[u.estado]}</td>
-                      <td>
-                        <Link to={`/usuarios/editar/${u._id}`}>
+                      <td className='border border-gray-300 p-4 text-gray-500'>{u.nombreCompleto}</td>
+                      <td className='border border-gray-300 p-4 text-gray-500'>{u.correo}</td>
+                      <td className='border border-gray-300 p-4 text-gray-500'>{u.identificacion}</td>
+                      <td className='border border-gray-300 p-4 text-gray-500'>{Enum_Tipo[u.tipo]}</td>
+                      <td className='border border-gray-300 p-4 text-gray-500'>{Enum_EstadoUsuario[u.estado]}</td>
+                      <td className='border border-gray-300 p-4 text-gray-500'>
+                        <Link to={`/usuarios/editar/${u._id}`} className='bg-indigo-500 text-gray-50 p-2 rounded-lg shadow-lg hover:bg-indigo-400'>
                           Editar
-                          <i className='fas fa-pen text-yellow-600 hover:text-yellow-400 cursor-pointer' />
                         </Link>
                       </td>
                     </tr>
