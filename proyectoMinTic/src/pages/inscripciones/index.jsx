@@ -25,7 +25,7 @@ const IndexInscripciones = () => {
         <div className='my-4'>
           <AccordionInscripcion
             titulo='Inscripciones aprobadas'
-            data={data.Inscripciones.filter((el) => el.estado === 'ACEPTADO')}
+            data={data.Inscripciones.filter((el) => el.estado === 'ACEPTADA')}
           />
           <AccordionInscripcion
             titulo='Inscripciones pendientes'
@@ -34,7 +34,7 @@ const IndexInscripciones = () => {
           />
           <AccordionInscripcion
             titulo='Inscripciones rechazadas'
-            data={data.Inscripciones.filter((el) => el.estado === 'RECHAZADO')}
+            data={data.Inscripciones.filter((el) => el.estado === 'RECHAZADA')}
           />
         </div>
       </div>

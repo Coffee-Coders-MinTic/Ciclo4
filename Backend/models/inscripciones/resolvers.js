@@ -17,7 +17,7 @@ const resolverInscripciones = {
       let filtro = {};
       if (context.userData) {
         if (context.userData.tipo === "LIDER") {
-          const projects = await ProjectModel.find({
+          const projects = await ProyectoModel.find({
             lider: context.userData._id,
           });
           const projectList = projects.map((p) => p._id.toString());
@@ -50,19 +50,27 @@ const resolverInscripciones = {
         proyecto: args.proyecto,
       }).catch((err) => console.log(err));
 
-      //TODO
-      //Validar por rol, que solo sea estudiante
-
       if (!inscripcionesActuales.length) {
         const inscripcionCreada = await InscripcionModel.create({
           proyecto: args.proyecto,
           estudiante: args.estudiante,
-        }).populate("proyecto estudiante");
+        });
 
         return inscripcionCreada;
       } else {
         return console.log("El usuario ya se encuentra inscrito");
       }
+    },
+    aprobarInscripcion: async (parent, args) => {
+      const inscripcionAprobada = await InscripcionModel.findByIdAndUpdate(
+        args.id,
+        {
+          estado: "ACEPTADA",
+          fechaIngreso: Date.now(),
+        },
+        { new: true }
+      );
+      return inscripcionAprobada;
     },
     actualizarInscripcion: async (parent, args) => {
       const inscripcionActualizada = await InscripcionModel.findByIdAndUpdate(

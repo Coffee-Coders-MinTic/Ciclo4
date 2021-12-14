@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { PROYECTOS } from 'graphql/proyectos/queries';
 import DropDown from 'components/Dropdown';
+import Input from 'components/Input';
 import { Dialog } from '@mui/material';
 import { Enum_EstadoProyecto } from 'utils/enums';
+import { Enum_Fase } from 'utils/enums';
 import ButtonLoading from 'components/ButtonLoading';
 import { EDITAR_PROYECTO } from 'graphql/proyectos/mutations';
 import useFormData from 'hooks/useFormData';
@@ -52,6 +54,7 @@ const IndexProyectos = () => {
 
 const AccordionProyecto = ({ proyecto }) => {
   const [showDialog, setShowDialog] = useState(false);
+  const [showAvances, setShowAvances] = useState(false);
   return (
     <>
       <AccordionStyled>
@@ -64,6 +67,10 @@ const AccordionProyecto = ({ proyecto }) => {
         </AccordionSummaryStyled>
         <AccordionDetailsStyled>
           <PrivateComponent roleList={['ADMINISTRADOR']}>
+            <button className="px-4 py-2 font-semibold text-sm bg-emerald-200 text-white rounded-full shadow-sm" onClick={() => {
+              setShowDialog(true);
+            }}>Cambiar estado</button>
+
             <i
               className='mx-4 fas fa-pen text-yellow-600 hover:text-yellow-400'
               onClick={() => {
@@ -78,12 +85,17 @@ const AccordionProyecto = ({ proyecto }) => {
               inscripciones={proyecto.inscripciones}
             />
           </PrivateComponent>
+          <div>Estado: {proyecto.estado}</div>
+          <div>Fase: {proyecto.fase}</div>
           <div>Liderado Por: {proyecto.lider.nombreCompleto}</div>
           <div className='flex'>
-            {proyecto.objGenerales.map((objetivo) => {
-              return <Objetivo descripcion={objetivo} />;
-            })}
+            {proyecto.objGenerales}
           </div>
+          <PrivateComponent roleList={['ESTUDIANTE', 'LIDER']}>
+            <button className="px-4 py-2 font-semibold text-sm bg-emerald-200 text-white rounded-full shadow-sm" onClick={() => {
+              setShowAvances(true);
+            }}>Ver avances</button>
+          </PrivateComponent>
         </AccordionDetailsStyled>
       </AccordionStyled>
       <Dialog
@@ -93,6 +105,14 @@ const AccordionProyecto = ({ proyecto }) => {
         }}
       >
         <FormEditProyecto _id={proyecto._id} />
+      </Dialog>
+      <Dialog
+        open={showAvances}
+        onClose={() => {
+          setShowAvances(false);
+        }}
+      >
+        <FormEditAvances proyecto={proyecto} />
       </Dialog>
     </>
   );
@@ -126,7 +146,51 @@ const FormEditProyecto = ({ _id }) => {
         className='flex flex-col items-center'
       >
         <DropDown label='Estado del Proyecto' name='estado' options={Enum_EstadoProyecto} />
+        <DropDown label='Fase del Proyecto' name='fase' options={Enum_Fase} />
         <ButtonLoading disabled={false} loading={loading} text='Confirmar' />
+      </form>
+    </div>
+  );
+};
+
+const FormEditAvances = ({ proyecto }) => {
+  const { form, formData, updateFormData } = useFormData();
+  const [editarProyecto, { data: dataMutation, loading, error }] = useMutation(EDITAR_PROYECTO);
+
+  const _id = proyecto._id;
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    editarProyecto({
+      variables: {
+        _id,
+        campos: formData,
+      },
+    });
+  };
+
+  useEffect(() => {
+    console.log('data mutation', dataMutation);
+  }, [dataMutation]);
+
+  return (
+    <div className='p-4'>
+      <h2 className='font-bold'>Avances</h2>
+      <div>
+        {proyecto &&
+          proyecto.avances.map(function (avance) {
+            return <p>Avance: {avance.descripcion} </p>;
+          })}
+      </div>
+      <form
+        ref={form}
+        onChange={updateFormData}
+        onSubmit={submitForm}
+        className='flex flex-col items-center'
+      >
+        <Input name='avance' label='Nuevo avance' required={true} type='text' />
+
+        <ButtonLoading disabled={false} loading={loading} text='Crear' />
       </form>
     </div>
   );

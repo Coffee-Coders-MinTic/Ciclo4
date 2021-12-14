@@ -43,7 +43,7 @@ const NuevoProyecto = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    formData.objetivos = Object.values(formData.objetivos);
+    // formData.objetivos = Object.values(formData.objetivos);
     formData.presupuesto = parseFloat(formData.presupuesto);
 
     crearProyecto({
@@ -65,9 +65,13 @@ const NuevoProyecto = () => {
         <Input name='nombreProyecto' label='Nombre del Proyecto' required={true} type='text' />
         <Input name='presupuesto' label='Presupuesto del Proyecto' required={true} type='number' />
         <Input name='fechaInicio' label='Fecha de Inicio' required={true} type='date' />
-        <Input name='fechaFin' label='Fecha de Fin' required={true} type='date' />
+        <Input name='fechaFinal' label='Fecha de Fin' required={true} type='date' />
         <DropDown label='Líder' options={listaUsuarios} name='lider' required={true} />
-        <Objetivos />
+        <label htmlFor="objGenerales" className='flex flex-col my-3'> Objetivos Generales</label>
+        <textarea name="objGenerales" id="objGenerales" className='input' cols="50" rows="4"></textarea>
+        <label htmlFor="objEspecificos" className='flex flex-col my-3'> Objetivos Específicos</label>
+        <textarea name="objEspecificos" id="objEspecificos" className='input' cols="50" rows="4"></textarea>
+        {/* <Objetivos /> */}
         <ButtonLoading text='Crear Proyecto' loading={false} disabled={false} />
       </form>
     </div>

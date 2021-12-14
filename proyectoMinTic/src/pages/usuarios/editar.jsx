@@ -67,7 +67,7 @@ const EditarUsuario = () => {
         <Input
           label='Nombre completo:'
           type='text'
-          name='nombre'
+          name='nombreCompleto'
           defaultValue={queryData.Usuario.nombreCompleto}
           required={true}
         />

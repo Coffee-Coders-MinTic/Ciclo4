@@ -14,17 +14,17 @@ const CREAR_PROYECTO = gql`
     $nombreProyecto: String!
     $presupuesto: Float!
     $fechaInicio: Date!
-    $fechaFin: Date!
+    $fechaFinal: Date!
     $lider: String!
-    $objGenerales: [String]
-    $objEspecificos: [String]
+    $objGenerales: String!
+    $objEspecificos: String!
     
   ) {
     crearProyecto(
       nombreProyecto: $nombreProyecto
       presupuesto: $presupuesto
       fechaInicio: $fechaInicio
-      fechaFin: $fechaFin
+      fechaFinal: $fechaFinal
       lider: $lider
       objGenerales: $objGenerales
       objEspecificos: $objEspecificos

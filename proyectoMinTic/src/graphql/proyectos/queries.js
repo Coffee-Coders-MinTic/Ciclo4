@@ -22,6 +22,15 @@ const PROYECTOS = gql`
           _id
         }
       }
+      avances {
+        _id
+        fechaAvance
+        descripcion
+        observaciones
+        creador {
+          _id
+        }
+      }
     }
   }
 `;

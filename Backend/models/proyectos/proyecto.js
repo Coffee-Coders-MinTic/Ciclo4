@@ -6,8 +6,8 @@ const { Schema, model } = mongoose;
 const proyectoSchema = new Schema(
   {
     nombreProyecto: { type: String, required: true },
-    objGenerales: [{ type: String, required: true }],
-    objEspecificos: [{ type: String, required: true }],
+    objGenerales: { type: String, required: true },
+    objEspecificos: { type: String, required: true },
     presupuesto: { type: Number, required: true },
     fechaInicio: { type: Date, required: true },
     fechaFinal: { type: Date },

@@ -4,43 +4,24 @@ import { UsuarioModel } from "../usuarios/usuario.js";
 const resolversProyecto = {
   Query: {
     Proyectos: async (parent, args) => {
-      return await ProyectoModel.find().populate("lider inscripciones");
-      //TODO
-      // Revisar para popular los usuarios por medio de inscripciones
+      return await ProyectoModel.find().populate("lider inscripciones avances");
     },
     Proyecto: async (parent, args) => {
       return await ProyectoModel.findOne({ _id: args._id }).populate("lider");
     },
   },
   Mutation: {
-    crearProyecto: (parent, args) => {
-      const {
-        nombreProyecto,
-        presupuesto,
-        fechaInicio,
-        fechaFinal,
-        estado,
-        fase,
-        lider,
-        objGenerales,
-        objEspecificos,
-      } = args.proyecto;
-
-      return ProyectoModel.create(args.proyecto)
-        .then((u) => "Proyecto creado")
-        .catch((err) => console.log(err));
+    crearProyecto: async (parent, args, context) => {
+      const proyectoCreado = await ProyectoModel.create(args);
+      return proyectoCreado;
     },
     editarProyecto: async (parent, args) => {
-      const actualUser = await UsuarioModel.findOne({ _id: args.campos.lider });
-
-      if (actualUser.tipo === "LIDER") {
-        const proyectoEditado = await ProyectoModel.findByIdAndUpdate(
-          args._id,
-          { ...args.campos },
-          { new: true }
-        ).populate("lider");
-        return proyectoEditado;
-      }
+      const proyectoEditado = await ProyectoModel.findByIdAndUpdate(
+        args._id,
+        { ...args.campos },
+        { new: true }
+      ).populate("lider");
+      return proyectoEditado;
     },
   },
 };
