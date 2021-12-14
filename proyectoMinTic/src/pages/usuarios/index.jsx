@@ -33,7 +33,7 @@ const IndexUsuarios = () => {
               <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Identificación</th>
               <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Rol</th>
               <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Estado</th>
-              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Editar</th>
+              <th className='w-1/2 border border-gray-300 font-semibold p-4 text-gray-900 text-left'>Acciones</th>
             </tr>
           </thead>
           <tbody>
