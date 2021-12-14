@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { PROYECTOS } from 'graphql/proyectos/queries';
 import DropDown from 'components/Dropdown';
-import Input from 'components/Input';
 import { Dialog } from '@mui/material';
 import { Enum_EstadoProyecto } from 'utils/enums';
 import { Enum_Fase } from 'utils/enums';
@@ -66,18 +65,6 @@ const AccordionProyecto = ({ proyecto }) => {
           </div>
         </AccordionSummaryStyled>
         <AccordionDetailsStyled>
-          <PrivateComponent roleList={['ADMINISTRADOR']}>
-            <button className="px-4 py-2 font-semibold text-sm bg-emerald-200 text-white rounded-full shadow-sm" onClick={() => {
-              setShowDialog(true);
-            }}>Cambiar estado</button>
-
-            <i
-              className='mx-4 fas fa-pen text-yellow-600 hover:text-yellow-400'
-              onClick={() => {
-                setShowDialog(true);
-              }}
-            />
-          </PrivateComponent>
           <PrivateComponent roleList={['ESTUDIANTE']}>
             <InscripcionProyecto
               idProyecto={proyecto._id}
@@ -91,11 +78,32 @@ const AccordionProyecto = ({ proyecto }) => {
           <div className='flex'>
             {proyecto.objGenerales}
           </div>
-          <PrivateComponent roleList={['ESTUDIANTE', 'LIDER']}>
-            <button className="px-4 py-2 font-semibold text-sm bg-emerald-200 text-white rounded-full shadow-sm" onClick={() => {
-              setShowAvances(true);
-            }}>Ver avances</button>
+          <PrivateComponent roleList={['LIDER', 'ESTUDIANTE']}>
+            {proyecto.estado === 'ACTIVO' &&
+              <div className='mt-5'>
+                <Link to={`/proyectos/editar/${proyecto._id}`} className='mt-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
+                  Ver detalle de proyecto
+                </Link>
+              </div>
+            }
           </PrivateComponent>
+          <PrivateComponent roleList={['ADMINISTRADOR']}>
+            <div className='flex mt-5'>
+              <div>
+                <Link to={`/proyectos/editar/${proyecto._id}`} className='flex bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
+                  Ver detalle de proyecto
+                </Link>
+              </div>
+              <div>
+                <button className="ml-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                  onClick={() => {
+                    setShowDialog(true);
+                  }}>Cambiar estado</button>
+              </div>
+            </div>
+
+          </PrivateComponent>
+
         </AccordionDetailsStyled>
       </AccordionStyled>
       <Dialog
@@ -105,14 +113,6 @@ const AccordionProyecto = ({ proyecto }) => {
         }}
       >
         <FormEditProyecto _id={proyecto._id} />
-      </Dialog>
-      <Dialog
-        open={showAvances}
-        onClose={() => {
-          setShowAvances(false);
-        }}
-      >
-        <FormEditAvances proyecto={proyecto} />
       </Dialog>
     </>
   );
@@ -149,61 +149,6 @@ const FormEditProyecto = ({ _id }) => {
         <DropDown label='Fase del Proyecto' name='fase' options={Enum_Fase} />
         <ButtonLoading disabled={false} loading={loading} text='Confirmar' />
       </form>
-    </div>
-  );
-};
-
-const FormEditAvances = ({ proyecto }) => {
-  const { form, formData, updateFormData } = useFormData();
-  const [editarProyecto, { data: dataMutation, loading, error }] = useMutation(EDITAR_PROYECTO);
-
-  const _id = proyecto._id;
-
-  const submitForm = (e) => {
-    e.preventDefault();
-    editarProyecto({
-      variables: {
-        _id,
-        campos: formData,
-      },
-    });
-  };
-
-  useEffect(() => {
-    console.log('data mutation', dataMutation);
-  }, [dataMutation]);
-
-  return (
-    <div className='p-4'>
-      <h2 className='font-bold'>Avances</h2>
-      <div>
-        {proyecto &&
-          proyecto.avances.map(function (avance) {
-            return <p>Avance: {avance.descripcion} </p>;
-          })}
-      </div>
-      <form
-        ref={form}
-        onChange={updateFormData}
-        onSubmit={submitForm}
-        className='flex flex-col items-center'
-      >
-        <Input name='avance' label='Nuevo avance' required={true} type='text' />
-
-        <ButtonLoading disabled={false} loading={loading} text='Crear' />
-      </form>
-    </div>
-  );
-};
-
-const Objetivo = ({ tipo, descripcion }) => {
-  return (
-    <div className='mx-5 my-4 bg-gray-50 p-8 rounded-lg flex flex-col items-center justify-center shadow-xl'>
-      <div className='text-lg font-bold'>{tipo}</div>
-      <div>{descripcion}</div>
-      <PrivateComponent roleList={['ADMINISTRADOR']}>
-        <div>Editar</div>
-      </PrivateComponent>
     </div>
   );
 };

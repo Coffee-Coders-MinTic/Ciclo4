@@ -7,7 +7,7 @@ const resolversProyecto = {
       return await ProyectoModel.find().populate("lider inscripciones avances");
     },
     Proyecto: async (parent, args) => {
-      return await ProyectoModel.findOne({ _id: args._id }).populate("lider");
+      return await ProyectoModel.findOne({ _id: args._id }).populate("lider inscripciones avances");
     },
   },
   Mutation: {

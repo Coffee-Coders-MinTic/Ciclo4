@@ -10,7 +10,6 @@ import IndexCategory1 from 'pages/category1/Index';
 import Category1 from 'pages/category1/CategoryPage1';
 import IndexUsuarios from 'pages/usuarios';
 import EditarUsuario from 'pages/usuarios/editar';
-import AuthLayout from 'layouts/AuthLayout';
 import Register from 'pages/auth/register';
 import Login from 'pages/auth/login';
 import { AuthContext } from 'context/authContext';
@@ -19,6 +18,7 @@ import jwt_decode from 'jwt-decode';
 import 'styles/globals.css';
 import 'styles/tabla.css';
 import NuevoProyecto from 'pages/proyectos/NuevoProyecto';
+import EditarProyecto from 'pages/proyectos/editar';
 import IndexInscripciones from 'pages/inscripciones';
 
 //import PrivateRoute from 'components/PrivateRoute';
@@ -85,6 +85,7 @@ function App() {
                 <Route path='/usuarios/editar/:_id' element={<EditarUsuario />} />
                 <Route path='/proyectos' element={<IndexProyectos />} />
                 <Route path='/proyectos/nuevo' element={<NuevoProyecto />} />
+                <Route path='/proyectos/editar/:_id' element={<EditarProyecto />} />
                 <Route path='/inscripciones' element={<IndexInscripciones />} />
                 <Route path='page2' element={<Page2 />} />
                 <Route path='category1' element={<IndexCategory1 />} />
