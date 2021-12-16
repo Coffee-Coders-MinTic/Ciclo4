@@ -37,6 +37,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/health-check", (req, resp) => {
+  resp.json("ok");
+});
+
 app.listen({ port: process.env.PORT || 4000 }, async () => {
   //sirve para poner a correr el servidor
   await conectarBD();
@@ -45,3 +49,5 @@ app.listen({ port: process.env.PORT || 4000 }, async () => {
   server.applyMiddleware({ app });
   console.log("Servidor listo");
 });
+
+export { app }
