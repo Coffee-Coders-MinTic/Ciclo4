@@ -24,7 +24,7 @@ import IndexInscripciones from 'pages/inscripciones';
 //import PrivateRoute from 'components/PrivateRoute';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://cryptic-wildwood-97711.herokuapp.com/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
