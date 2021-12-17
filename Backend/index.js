@@ -37,6 +37,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+console.log("CI Init");
+
 app.get("/health-check", (req, resp) => {
   resp.json("ok");
 });
@@ -50,4 +52,4 @@ app.listen({ port: process.env.PORT || 4000 }, async () => {
   console.log("Servidor listo");
 });
 
-export { app }
+export { app };
